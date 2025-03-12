@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "b1ac0e44-8379-4afe-9d6c-4835e5042fe7",
+		"name": "security-fileHandling-errorHandling-node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43007932"
+	},
+	"item": [
+		{
+			"name": "download",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/download/Screenshot_13",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"download",
+						"Screenshot_13"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/dev.mehta@simform.dom/Downloads/Screenshot_13.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Base_Url}}/upload",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"upload"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/signup?username=rick&password=rick",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"signup"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "rick"
+						},
+						{
+							"key": "password",
+							"value": "rick"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/signin?username=rick&password=rick",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"signin"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "rick"
+						},
+						{
+							"key": "password",
+							"value": "rick"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signout",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/signout",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"signout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vcnR5IiwiaWF0IjoxNzQxNzc3OTA0LCJleHAiOjE3NDMwNzM5MDR9.9XebqCtThV-TPGb90PjGj_tqkScpp8_9V1sYx5gBni8"
+		}
+	]
+}
