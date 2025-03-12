@@ -4,7 +4,7 @@ import { handleDownload } from "./controllers/download.js";
 import { COMMON_MESSAGES } from "./utils/error.js";
 import { handleSignin } from "./controllers/signin.js";
 import { handleSignup } from "./controllers/signup.js";
-
+import { validateUser } from "./middlewares/validateUser.js";
 const server = http.createServer((req, res) => {
 	if (req.method === "POST" && req.url.startsWith("/signup")) {
 		handleSignup(req, res)
@@ -18,16 +18,18 @@ const server = http.createServer((req, res) => {
 			});
 	} else if (req.method === "POST" && req.url.startsWith("/signin")) {
 		handleSignin(req, res)
-			.then(() => {
+			.then((token) => {
+				res.setHeader("Set-Cookie", `token=${token};`);
 				res.statusCode = 200;
-				res.end(COMMON_MESSAGES.SUCCESS);
+				res.end("Cookie has been set!");
 			})
 			.catch((error) => {
 				res.statusCode = error.statusCode;
 				res.end(error.message);
 			});
-	} else if (req.method === "POST" && req.url === "/upload") {
+	} else if (req.method === "POST" && req.url.startsWith("/upload")) {
 		try {
+			validateUser(req, res);
 			handleUpload(req, res);
 		} catch (error) {
 			res.statusCode = error.statusCode;
@@ -35,8 +37,10 @@ const server = http.createServer((req, res) => {
 		}
 	} else if (req.method === "GET" && req.url.startsWith("/download")) {
 		try {
+			validateUser(req, res);
 			handleDownload(req, res);
 		} catch (error) {
+			console.log(error);
 			res.statusCode = error.statusCode;
 			res.end(error.message);
 		}

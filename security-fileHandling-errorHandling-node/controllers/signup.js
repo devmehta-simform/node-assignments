@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { CustomError } from "../utils/error.js";
 import { parseUrl } from "../utils/urlParser.js";
 import { prisma } from "../utils/prismaProvider.js";

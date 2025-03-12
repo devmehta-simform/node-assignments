@@ -5,7 +5,7 @@ import { COMMON_MESSAGES, CustomError } from "../utils/error.js";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export const handleDownload = (req, res) => {
-	const fileId = req.url.split("/")[2];
+	const fileId = req.url.split(/[/?]/)[2];
 	const exts = [".jpeg", ".jpg", ".png"];
 	let foundExt = null;
 	for (const ext of exts) {
