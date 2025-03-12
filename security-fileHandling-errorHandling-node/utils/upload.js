@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import multer from "multer";
+import { CustomError } from "./error.js";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -26,7 +27,7 @@ export const handleUpload = (req, res) => {
 		if (err) {
 			res.statusCode = 500;
 			res.end("File upload failed: " + err.message);
-			return;
+			throw new CustomError("File upload failed: " + err.message, 500);
 		}
 
 		res.writeHead(200, { "Content-Type": "text/plain" });

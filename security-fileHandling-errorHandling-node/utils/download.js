@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { COMMON_MESSAGES, CustomError } from "./error.js";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -18,12 +19,12 @@ export const handleDownload = (req, res) => {
 			"Content-Type": "application/octet-stream",
 			"Content-Disposition": "attachment; filename='picture.png'",
 		});
-		fs.createReadStream(
+		const fsReadStream = fs.createReadStream(
 			path.resolve(__dirname, "../uploads/", fileId + foundExt)
-		).pipe(res);
-	} else {
-		res.statusCode = 404;
-		res.end();
+		);
+		fsReadStream.pipe(res);
 		return;
+	} else {
+		throw new CustomError(COMMON_MESSAGES.NOT_FOUND, 404);
 	}
 };

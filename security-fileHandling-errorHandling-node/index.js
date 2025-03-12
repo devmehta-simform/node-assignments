@@ -1,15 +1,26 @@
 import http from "http";
-import { handleUpload } from "./middlewares/upload.js";
-import { handleDownload } from "./middlewares/download.js";
+import { handleUpload } from "./utils/upload.js";
+import { handleDownload } from "./utils/download.js";
+import { COMMON_MESSAGES } from "./utils/error.js";
 
 const server = http.createServer((req, res) => {
 	if (req.method === "POST" && req.url === "/upload") {
-		handleUpload(req, res);
+		try {
+			handleUpload(req, res);
+		} catch (error) {
+			res.statusCode = error.statusCode;
+			res.end(error.message);
+		}
 	} else if (req.method === "GET" && req.url.startsWith("/download")) {
-		handleDownload(req, res);
+		try {
+			handleDownload(req, res);
+		} catch (error) {
+			res.statusCode = error.statusCode;
+			res.end(error.message);
+		}
 	} else {
 		res.statusCode = 404;
-		res.end();
+		res.end(COMMON_MESSAGES.ROUTE_NOT_FOUND);
 	}
 });
 
