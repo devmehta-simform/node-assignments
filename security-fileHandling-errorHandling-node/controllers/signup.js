@@ -10,10 +10,7 @@ export const handleSignup = async (req, res) => {
 			data: { username: params["username"], password: params["password"] },
 		});
 	} catch (error) {
-		throw new CustomError(
-			"error storing data: " + error.toString(),
-			COMMON_MESSAGES.INTERNAL_SERVER_ERROR
-		);
+		throw new CustomError("error storing data: " + error.toString(), 400);
 	}
 };
 function parseUrl(req) {

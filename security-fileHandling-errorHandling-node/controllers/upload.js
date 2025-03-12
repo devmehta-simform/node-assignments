@@ -25,8 +25,6 @@ export const handleUpload = (req, res) => {
 
 	multerMiddleware(req, res, (err) => {
 		if (err) {
-			res.statusCode = 500;
-			res.end("File upload failed: " + err.message);
 			throw new CustomError("File upload failed: " + err.message, 500);
 		}
 

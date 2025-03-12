@@ -7,12 +7,15 @@ import { handleSignup } from "./controllers/signup.js";
 
 const server = http.createServer((req, res) => {
 	if (req.method === "POST" && req.url.startsWith("/signup")) {
-		try {
-			handleSignup(req, res);
-		} catch (error) {
-			res.statusCode = error.statusCode;
-			res.end(error.message);
-		}
+		handleSignup(req, res)
+			.then(() => {
+				res.statusCode = 200;
+				res.end(COMMON_MESSAGES.SUCCESS);
+			})
+			.catch((error) => {
+				res.statusCode = error.statusCode;
+				res.end(error.message);
+			});
 	} else if (req.method === "POST" && req.url === "/signin") {
 		handleSignin(req, res);
 	} else if (req.method === "POST" && req.url === "/upload") {
