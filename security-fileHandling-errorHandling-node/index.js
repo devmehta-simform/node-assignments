@@ -6,10 +6,15 @@ import { handleSignin } from "./controllers/signin.js";
 import { handleSignup } from "./controllers/signup.js";
 
 const server = http.createServer((req, res) => {
-	if (req.method === "POST" && req.url === "/signup") {
-		handleSignin(req, res);
+	if (req.method === "POST" && req.url.startsWith("/signup")) {
+		try {
+			handleSignup(req, res);
+		} catch (error) {
+			res.statusCode = error.statusCode;
+			res.end(error.message);
+		}
 	} else if (req.method === "POST" && req.url === "/signin") {
-		handleSignup(req, res);
+		handleSignin(req, res);
 	} else if (req.method === "POST" && req.url === "/upload") {
 		try {
 			handleUpload(req, res);
