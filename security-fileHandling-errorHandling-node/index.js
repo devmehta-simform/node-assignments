@@ -1,10 +1,12 @@
 import http from "http";
-import { handleUpload } from "./utils/upload.js";
-import { handleDownload } from "./utils/download.js";
+import { handleUpload } from "./controllers/upload.js";
+import { handleDownload } from "./controllers/download.js";
 import { COMMON_MESSAGES } from "./utils/error.js";
 
 const server = http.createServer((req, res) => {
-	if (req.method === "POST" && req.url === "/upload") {
+	if (req.method === "POST" && req.url === "/signup") {
+	} else if (req.method === "POST" && req.url === "/signin") {
+	} else if (req.method === "POST" && req.url === "/upload") {
 		try {
 			handleUpload(req, res);
 		} catch (error) {

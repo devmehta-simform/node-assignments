@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import multer from "multer";
-import { CustomError } from "./error.js";
+import { CustomError } from "../utils/error.js";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 

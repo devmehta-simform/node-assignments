@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { COMMON_MESSAGES, CustomError } from "./error.js";
+import { COMMON_MESSAGES, CustomError } from "../utils/error.js";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
