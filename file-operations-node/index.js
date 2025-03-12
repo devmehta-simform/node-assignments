@@ -34,9 +34,32 @@ const server = http.createServer((req, res) => {
 			res.writeHead(200, { "Content-Type": "text/plain" });
 			res.end("File uploaded successfully");
 		});
+	} else if (req.method === "GET" && req.url.startsWith("/download")) {
+		const fileId = req.url.split("/")[2];
+		const exts = [".jpeg", ".jpg", ".png"];
+		let foundExt = null;
+		for (const ext of exts) {
+			if (fs.existsSync(path.join(__dirname, "uploads", fileId + ext))) {
+				foundExt = ext;
+				break;
+			}
+		}
+		if (foundExt !== null) {
+			res.writeHead(200, {
+				"Content-Type": "application/octet-stream",
+				"Content-Disposition": "attachment; filename='picture.png'",
+			});
+			fs.createReadStream(
+				path.join(__dirname, "uploads", fileId + foundExt)
+			).pipe(res);
+		} else {
+			res.statusCode = 404;
+			res.end();
+			return;
+		}
 	} else {
-		res.statusCode = 500;
-		res.end("internal server error");
+		res.statusCode = 404;
+		res.end();
 	}
 });
 
