@@ -1,0 +1,13 @@
+npm i -D prisma
+
+npm i @prisma/client
+
+npx prisma init (This creates:
+1. prisma/schema.prisma: The schema file where you'll define your data models.
+2. .env: Environment file to store your connection string and other configuration variables.)
+
+configure env (for mongodb make sure to add the DB_NAME else error 8000 will be thrown)
+
+npx prisma generate (This command generates the Prisma Client based on your schema and makes it available for use in your project.)
+
+npx prisma db push (This command will sync the database schema with your MongoDB database, applying the changes you made in the schema.prisma file.)
