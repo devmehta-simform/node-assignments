@@ -6,12 +6,52 @@
 		<title><%= title %></title>
 		<link rel="stylesheet" href="/style.css" />
 	</head>
-	<body>
+	<body class="<%= theme %>">
 		<%- include('partials/header') -%>
 		<div class="content">
 			<h2>Welcome, <%= name %>!</h2>
 			<p>Date: <%= date %></p>
 			<p><%= description %></p>
+
+			<!-- Loop through an array of items -->
+			<h3>List of Items:</h3>
+			<ul>
+				<% for (let i = 0; i < items.length; i++) { %> <% if
+				(items[i].includes('Admin')) { %>
+				<li><%= items[i] %></li>
+				<% } %> <% } %>
+			</ul>
+			<!-- Conditional Rendering -->
+			<% if (isAdmin) { %>
+			<p>You are an admin!</p>
+			<% } else { %>
+			<p>You are a regular user.</p>
+			<% } %>
+
+			<!-- Theme Toggle Button -->
+			<button id="theme-toggle">Toggle Theme</button>
 		</div>
+
+		<!-- Script to handle theme toggle -->
+		<script>
+			const themeToggleButton = document.getElementById("theme-toggle");
+			themeToggleButton.addEventListener("click", function () {
+				const currentTheme = document.body.classList.contains("dark")
+					? "dark"
+					: "light";
+				const newTheme = currentTheme === "dark" ? "light" : "dark";
+				document.body.classList.remove(currentTheme);
+				document.body.classList.add(newTheme);
+
+				// Save theme to localStorage so it's persisted across page reloads
+				localStorage.setItem("theme", newTheme);
+			});
+
+			// Set initial theme based on localStorage
+			window.onload = () => {
+				const savedTheme = localStorage.getItem("theme") || "light"; // default to 'light'
+				document.body.classList.add(savedTheme);
+			};
+		</script>
 	</body>
 </html>
