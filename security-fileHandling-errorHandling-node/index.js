@@ -19,9 +19,9 @@ const server = http.createServer((req, res) => {
 	} else if (req.method === "POST" && req.url.startsWith("/signin")) {
 		handleSignin(req, res)
 			.then((token) => {
-				res.setHeader("Set-Cookie", `token=${token};`);
+				res.setHeader("Set-Cookie", `token=${token}; HTTPOnly`);
 				res.statusCode = 200;
-				res.end("Cookie has been set!");
+				res.end("success");
 			})
 			.catch((error) => {
 				res.statusCode = error.statusCode;
@@ -44,6 +44,10 @@ const server = http.createServer((req, res) => {
 			res.statusCode = error.statusCode;
 			res.end(error.message);
 		}
+	} else if (req.method === "DELETE" && req.url === "/signout") {
+		res.setHeader("Set-Cookie", "token=; HttpOnly");
+		res.statusCode = 200;
+		res.end("Logged out successfully!");
 	} else {
 		res.statusCode = 404;
 		res.end(COMMON_MESSAGES.ROUTE_NOT_FOUND);

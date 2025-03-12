@@ -11,4 +11,5 @@ export const COMMON_MESSAGES = {
 	NOT_FOUND: "not found",
 	ROUTE_NOT_FOUND: "route not found",
 	INTERNAL_SERVER_ERROR: "internal server error",
+	UNAUTHORIZED: "unauthorized user, please login",
 };
