@@ -16,8 +16,16 @@ const server = http.createServer((req, res) => {
 				res.statusCode = error.statusCode;
 				res.end(error.message);
 			});
-	} else if (req.method === "POST" && req.url === "/signin") {
-		handleSignin(req, res);
+	} else if (req.method === "POST" && req.url.startsWith("/signin")) {
+		handleSignin(req, res)
+			.then(() => {
+				res.statusCode = 200;
+				res.end(COMMON_MESSAGES.SUCCESS);
+			})
+			.catch((error) => {
+				res.statusCode = error.statusCode;
+				res.end(error.message);
+			});
 	} else if (req.method === "POST" && req.url === "/upload") {
 		try {
 			handleUpload(req, res);

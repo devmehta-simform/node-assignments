@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { COMMON_MESSAGES, CustomError } from "../utils/error.js";
-
-const prisma = new PrismaClient();
+import { CustomError } from "../utils/error.js";
+import { parseUrl } from "../utils/urlParser.js";
+import { prisma } from "../utils/prismaProvider.js";
 
 export const handleSignup = async (req, res) => {
 	const params = parseUrl(req);
@@ -13,12 +13,3 @@ export const handleSignup = async (req, res) => {
 		throw new CustomError("error storing data: " + error.toString(), 400);
 	}
 };
-function parseUrl(req) {
-	const queryParams = req.url.split(/[?&=]/);
-	queryParams.shift();
-	const params = {};
-	for (let i = 0; i < queryParams.length; i += 2) {
-		params[queryParams[i]] = queryParams[i + 1];
-	}
-	return params;
-}
