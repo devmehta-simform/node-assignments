@@ -1,6 +1,7 @@
-console.clear();
-if (process.argv[2] === "--help") {
-	console.log(`
+import "./utils/generateTimezoneMap.js";
+(() => {
+	if (process.argv[2] && process.argv[2] === "--help") {
+		console.log(`
 
     provide following command line arguments
 
@@ -18,16 +19,16 @@ if (process.argv[2] === "--help") {
     CONVERTED_TIME '10:30 AM'
 
   `);
-	return;
-}
-
-const convertToTimezone = process.argv[4] || "PT";
-const currentTimezone = process.argv[3] || "IST";
-const currentTime =
-	process.argv[2] ||
-	new Date(Date.now()).toLocaleString("en-US", {
-		hour: "numeric",
-		hour12: true,
-		minute: "numeric",
-		timeZone: currentTimezone,
-	});
+		return;
+	}
+	const currentTimezone = process.argv[3] || "IST";
+	const currentTime =
+		process.argv[2] ||
+		new Date(Date.now()).toLocaleString("en-US", {
+			hour: "numeric",
+			hour12: true,
+			minute: "numeric",
+			timeZone: currentTimezone,
+		});
+	const convertToTimezone = process.argv[4] || "PT";
+})();
