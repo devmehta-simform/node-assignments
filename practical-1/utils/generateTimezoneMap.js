@@ -8,19 +8,19 @@ export default (() => {
 		const userTimezones = Intl.supportedValuesOf("timeZone");
 		const mapAbbr = {};
 		userTimezones.forEach((tz) => {
-			const formatter = new Intl.DateTimeFormat("en-US", {
-				timeZoneName: "long",
-				timeZone: tz,
-			});
-			const parts = formatter.formatToParts(new Date());
-			const timeZone = parts.find((part) => part.type === "timeZoneName").value;
-			const abbr = timeZone
-				.split(" ")
-				.map(([F]) => F)
-				.join("");
+			/* reference: https://bito.ai/resources/javascript-get-timezone-name-javascript-explained/#:~:text=Additionally%2C%20the%20method%20getTimezoneName(),time%20in%20the%20local%20timezone. */
+			const timeZoneArr = new Date()
+				.toLocaleString("en-US", {
+					timeZoneName: "long",
+					timeZone: tz,
+				})
+				.split(" ");
+			const timeZone = timeZoneArr.splice((timeZoneArr.length - 3) * -1);
+			const abbr = timeZone.map(([F]) => F).join("");
 			if (mapAbbr[abbr]) mapAbbr[abbr].push(tz);
 			else mapAbbr[abbr] = [tz];
 		});
+
 		writeFileSync(dbFilePath, JSON.stringify(mapAbbr));
 	}
 })();
