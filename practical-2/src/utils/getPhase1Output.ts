@@ -1,7 +1,7 @@
 export function getPhase1Output(
-	nowDateTime: any,
-	openDateTime: any,
-	closeDateTime: any
+	nowDateTime: Date,
+	openDateTime: Date,
+	closeDateTime: Date
 ) {
 	if (nowDateTime >= openDateTime && nowDateTime <= closeDateTime) {
 		return "OPEN";
