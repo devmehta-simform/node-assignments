@@ -1,4 +1,3 @@
-import { convertTimeToDate } from "./convertTimeToDate";
 import { convertTo24hrFormat } from "./convertTo24hrFormat";
 
 export function getPhase2Output(
