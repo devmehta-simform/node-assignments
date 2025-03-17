@@ -15,7 +15,7 @@ if (todaysSchedule) {
     const openDateTime = convertTimeToDate(now, openHr, openMin);
     const closeDateTime = convertTimeToDate(now, closeHr, closeMin);
     const nowDateTime = convertTimeToDate(now, now.getHours().toString(), now.getMinutes().toString());
-    console.log((0, getPhase1Output_1.getPhase1Output)(nowDateTime, openDateTime, closeDateTime));
+    console.log("phase 1: ", (0, getPhase1Output_1.getPhase1Output)(nowDateTime, openDateTime, closeDateTime));
 }
 function convertTo24hrFormat(timeIn12hrFormat) {
     const [hr, min, amOrPm] = timeIn12hrFormat.split(/[ :]/);
