@@ -1,7 +1,7 @@
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import path from "path";
 export default (() => {
-	const dbDirPath = path.resolve("src/db");
+	const dbDirPath = path.resolve(__dirname, "../db");
 	const dbFilePath = path.resolve(dbDirPath, "db.json");
 	console.log(dbDirPath, dbFilePath);
 	if (!existsSync(dbDirPath)) mkdirSync(dbDirPath);

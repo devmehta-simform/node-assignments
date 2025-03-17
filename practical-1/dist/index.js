@@ -35,7 +35,7 @@ require("./utils/generateTimezoneMap");
     convertTz(currentTime, fromTz, toTz);
 })();
 function convertTz(currentTime, fromTzAbbr, toTzAbbr) {
-    const tzMap = JSON.parse((0, fs_1.readFileSync)(path_1.default.resolve("src/db/db.json"), "utf-8"));
+    const tzMap = JSON.parse((0, fs_1.readFileSync)(path_1.default.resolve(__dirname, "db/db.json"), "utf8"));
     const [newHr, newMin] = convertTo24hrFormat(currentTime);
     const now = new Date();
     const year = now.getFullYear();

@@ -33,7 +33,7 @@ import "./utils/generateTimezoneMap";
 
 function convertTz(currentTime: string, fromTzAbbr: string, toTzAbbr: string) {
 	const tzMap: { [key: string]: string[] } = JSON.parse(
-		readFileSync(path.resolve("src/db/db.json"), "utf-8")
+		readFileSync(path.resolve(__dirname, "db/db.json"), "utf8")
 	);
 	const [newHr, newMin] = convertTo24hrFormat(currentTime);
 	const now = new Date();

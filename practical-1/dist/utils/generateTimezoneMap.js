@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const path_1 = __importDefault(require("path"));
 exports.default = (() => {
-    const dbDirPath = path_1.default.resolve("src/db");
+    const dbDirPath = path_1.default.resolve(__dirname, "../db");
     const dbFilePath = path_1.default.resolve(dbDirPath, "db.json");
     console.log(dbDirPath, dbFilePath);
     if (!(0, fs_1.existsSync)(dbDirPath))
