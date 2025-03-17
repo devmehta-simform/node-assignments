@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const shopSchedule_json_1 = __importDefault(require("./db/shopSchedule.json"));
+const getPhase1Output_1 = require("./utils/getPhase1Output");
 const SHOP_SCHEDULE = shopSchedule_json_1.default;
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const now = new Date();
@@ -14,12 +15,7 @@ if (todaysSchedule) {
     const openDateTime = convertTimeToDate(now, openHr, openMin);
     const closeDateTime = convertTimeToDate(now, closeHr, closeMin);
     const nowDateTime = convertTimeToDate(now, now.getHours().toString(), now.getMinutes().toString());
-    if (nowDateTime >= openDateTime && nowDateTime <= closeDateTime) {
-        console.log("open");
-    }
-    else {
-        console.log("close");
-    }
+    console.log((0, getPhase1Output_1.getPhase1Output)(nowDateTime, openDateTime, closeDateTime));
 }
 function convertTo24hrFormat(timeIn12hrFormat) {
     const [hr, min, amOrPm] = timeIn12hrFormat.split(/[ :]/);

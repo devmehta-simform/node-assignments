@@ -1,4 +1,5 @@
 import { default as data } from "./db/shopSchedule.json";
+import { getPhase1Output } from "./utils/getPhase1Output";
 
 type ShopSchedule = {
 	day: string;
@@ -29,19 +30,7 @@ if (todaysSchedule) {
 		now.getMinutes().toString()
 	);
 
-	getPhase1Output(nowDateTime, openDateTime, closeDateTime);
-}
-
-function getPhase1Output(
-	nowDateTime: any,
-	openDateTime: any,
-	closeDateTime: any
-) {
-	if (nowDateTime >= openDateTime && nowDateTime <= closeDateTime) {
-		console.log("open");
-	} else {
-		console.log("close");
-	}
+	console.log(getPhase1Output(nowDateTime, openDateTime, closeDateTime));
 }
 
 function convertTo24hrFormat(timeIn12hrFormat: string) {
