@@ -29,6 +29,14 @@ if (todaysSchedule) {
 		now.getMinutes().toString()
 	);
 
+	getPhase1Output(nowDateTime, openDateTime, closeDateTime);
+}
+
+function getPhase1Output(
+	nowDateTime: any,
+	openDateTime: any,
+	closeDateTime: any
+) {
 	if (nowDateTime >= openDateTime && nowDateTime <= closeDateTime) {
 		console.log("open");
 	} else {
