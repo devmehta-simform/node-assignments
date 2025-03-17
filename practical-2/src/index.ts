@@ -30,7 +30,10 @@ if (todaysSchedule) {
 		now.getMinutes().toString()
 	);
 
-	console.log(getPhase1Output(nowDateTime, openDateTime, closeDateTime));
+	console.log(
+		"phase 1: ",
+		getPhase1Output(nowDateTime, openDateTime, closeDateTime)
+	);
 }
 
 function convertTo24hrFormat(timeIn12hrFormat: string) {
@@ -57,7 +60,7 @@ function convertTo24hrFormat(timeIn12hrFormat: string) {
 	return `${newHr}:${min}`;
 }
 
-function convertTimeToDate(now: Date, hr: string, min: string): any {
+function convertTimeToDate(now: Date, hr: string, min: string): Date {
 	return new Date(
 		now.getFullYear(),
 		now.getMonth(),
