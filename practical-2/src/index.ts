@@ -1,7 +1,7 @@
 import { default as data } from "./db/shopSchedule.json";
 import { getPhase1Output } from "./utils/getPhase1Output";
-import { getPhase2Output } from "utils/getPhase2Output";
-import { getPhase3Output } from "utils/getPhase3Output";
+import { getPhase2Output } from "./utils/getPhase2Output";
+import { getPhase3Output } from "./utils/getPhase3Output";
 
 const now = new Date();
 
