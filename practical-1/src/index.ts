@@ -1,9 +1,8 @@
-import "./utils/generateTimezoneMap.js";
+import { readFileSync } from "fs";
+import path from "path";
+import "./utils/generateTimezoneMap";
 
-(async () => {
-	const { default: tzMap } = await import("./db/db.json", {
-		with: { type: "json" },
-	});
+(() => {
 	if (process.argv[3] === undefined) {
 		console.log(`
 
@@ -29,18 +28,27 @@ import "./utils/generateTimezoneMap.js";
 	const currentTime = process.argv[2];
 	const fromTz = process.argv[3];
 	const toTz = process.argv[4];
-	convertTz(currentTime, fromTz, toTz, tzMap);
+	convertTz(currentTime, fromTz, toTz);
 })();
 
-function convertTz(currentTime, fromTzAbbr, toTzAbbr, tzMap) {
+function convertTz(currentTime: string, fromTzAbbr: string, toTzAbbr: string) {
+	const tzMap: { [key: string]: string[] } = JSON.parse(
+		readFileSync(path.resolve("src/db/db.json"), "utf-8")
+	);
 	const [newHr, newMin] = convertTo24hrFormat(currentTime);
 	const now = new Date();
 
 	const year = now.getFullYear();
 	const month = now.getMonth();
 	const date = now.getDate();
-	if (Object.hasOwn(tzMap, toTzAbbr)) {
-		const refTime = new Date(year, month, date, newHr, newMin);
+	if (Object.getOwnPropertyDescriptor(tzMap, toTzAbbr)) {
+		const refTime = new Date(
+			year,
+			month,
+			date,
+			parseInt(newHr),
+			parseInt(newMin)
+		);
 
 		tzMap[fromTzAbbr].forEach((fromTz) => {
 			tzMap[toTzAbbr].forEach((toTz) => {
@@ -64,7 +72,7 @@ function convertTz(currentTime, fromTzAbbr, toTzAbbr, tzMap) {
 	}
 }
 
-function convertTo24hrFormat(currentTime) {
+function convertTo24hrFormat(currentTime: string) {
 	const [hr, min, amOrPm] = currentTime.split(/[: ]/);
 	let newHr = "";
 	switch (amOrPm) {
