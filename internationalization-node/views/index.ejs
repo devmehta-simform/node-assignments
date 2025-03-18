@@ -1,32 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%=lang%>" dir="<%=lang==='ar'?'rtl':'ltr'%>">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><%= title %></title>
 		<link rel="stylesheet" href="/style.css" />
 	</head>
-	<body class="<%= theme %>">
+	<body class="">
 		<%- include('partials/header') -%>
 		<div class="content">
-			<h2>Welcome, <%= name %>!</h2>
+			<h2><%=greeting%>, <%= name %>!</h2>
 			<p>Date: <%= date %></p>
 			<p><%= description %></p>
 
 			<!-- Loop through an array of items -->
-			<h3>List of Items:</h3>
+			<h3><%=itemsTitle%></h3>
 			<ul>
-				<% for (let i = 0; i < items.length; i++) { %> <% if
-				(items[i].includes('Admin')) { %>
+				<% for (let i = 0; i < items.length; i++) { %>
 				<li><%= items[i] %></li>
-				<% } %> <% } %>
+				<% } %>
 			</ul>
-			<!-- Conditional Rendering -->
-			<% if (isAdmin) { %>
-			<p>You are an admin!</p>
-			<% } else { %>
-			<p>You are a regular user.</p>
-			<% } %>
 
 			<!-- Theme Toggle Button -->
 			<button id="theme-toggle">Toggle Theme</button>

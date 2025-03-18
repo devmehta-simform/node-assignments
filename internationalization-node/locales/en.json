@@ -1,0 +1,15 @@
+{
+	"page": {
+		"title": "Simple EJS Demo",
+		"description": "This is a simple demo of EJS rendering with basic styling!",
+		"greeting": "Hello"
+	},
+	"item": {
+		"itemsTitle": "List of Items",
+		"item1": "Item 1",
+		"item2": "Item 2",
+		"item3": "Item 3",
+		"item4": "Item 4",
+		"title": "item.title"
+	}
+}
