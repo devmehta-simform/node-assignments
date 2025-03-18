@@ -1,0 +1,17 @@
+<header>
+	<h1><%= title %></h1>
+	<div>
+		<button onclick="changeLanguage('en')">English</button>
+		<button onclick="changeLanguage('es')">Español</button>
+		<button onclick="changeLanguage('fr')">Français</button>
+		<button onclick="changeLanguage('ar')">عربي</button>
+	</div>
+	<script>
+		function changeLanguage(lang) {
+			console.log(lang);
+			const link = document.createElement("a");
+			link.href = `/?lang=${lang}`;
+			link.click();
+		}
+	</script>
+</header>
